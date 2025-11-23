@@ -1,4 +1,14 @@
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "daisyui" {
+  themes: light --default;
+}
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  --color-primary: #008ECC;
+  --color-secondary: teal;
+}
 
-
+.container {
+  @apply container mx-auto;
+}

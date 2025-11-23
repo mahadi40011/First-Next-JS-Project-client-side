@@ -1,77 +1,66 @@
+"use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React from "react";
+import { FaUserPlus } from "react-icons/fa";
+import { BiMenuAltLeft } from "react-icons/bi";
+
 
 export default function Navbar() {
+  const pathname = usePathname();
+
+  const navItems = [
+    { id: 0, path: "/", name: "Home" },
+    { id: 1, path: "/about", name: "About" },
+    { id: 2, path: "/contact", name: "Contact" },
+    { id: 3, path: "/products", name: "Products" },
+    { id: 4, path: "/cart", name: "Cart" },
+  ];
+
+  const navLinks = navItems.map((item) => (
+    <Link
+      className={`md:mx-2 md:text-lg ${
+        pathname === item.path ? "md:border-b md:mb-1 text-blue-500" : ""
+      }`}
+      key={item.id}
+      href={item.path}
+    >
+      {item.name}
+    </Link>
+  ));
+
   return (
-    <div className="navbar bg-base-100 shadow-sm">
-      <div className="navbar-start">
-        <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+    <div className="bg-base-100 shadow-sm">
+      <div className="navbar container">
+        <div className="navbar-start">
+          <div className="dropdown">
+            <div tabIndex={0} role="button" className="text-primary lg:hidden">
+              <BiMenuAltLeft size={24}/>
+            </div>
+            <ul
+              tabIndex="-1"
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-24 p-2 shadow"
             >
-              {" "}
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />{" "}
-            </svg>
+              {navLinks}
+            </ul>
           </div>
-          <ul
-            tabIndex="-1"
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
-          >
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <a>Parent</a>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
-          </ul>
+          <a className="ml-2 md:ml-0 text-primary font-bold text-2xl">MegaMart</a>
         </div>
-        <a className="btn btn-ghost text-xl">daisyUI</a>
-      </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          <li>
-            <a>Item 1</a>
-          </li>
-          <li>
-            <details>
-              <summary>Parent</summary>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </details>
-          </li>
-          <li>
-            <a>Item 3</a>
-          </li>
-        </ul>
-      </div>
-      <div className="navbar-end">
-        <a className="btn">Button</a>
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu menu-horizontal px-1">{navLinks}</ul>
+        </div>
+        <div className="navbar-end">
+          <div className="flex items-center gap-2.5">
+            <span>
+              <FaUserPlus />
+            </span>
+            <div className="font-semibold space-x-0.5">
+              <Link href="/">Sign Up</Link>
+              <span>/</span>
+              <Link href="/">Sign In</Link>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
