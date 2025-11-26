@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 import { AuthContext } from "./AuthContext";
 import {
@@ -24,8 +26,8 @@ const AuthProvider = ({ children }) => {
 
   const updateUserProfile = (displayName, photoURL) => {
     setLoading(true);
-    return updateProfile(auth.currentUser, {displayName, photoURL})
-  }
+    return updateProfile(auth.currentUser, { displayName, photoURL });
+  };
 
   const googleLogin = () => {
     setLoading(true);
@@ -34,14 +36,14 @@ const AuthProvider = ({ children }) => {
 
   const logOutUser = () => {
     setLoading(true);
-    return signOut(auth)
-  }
+    return signOut(auth);
+  };
 
   const LoginUser = (email, password) => {
     setLoading(true);
-    return signInWithEmailAndPassword(auth, email, password)
-  }
-  
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -62,7 +64,7 @@ const AuthProvider = ({ children }) => {
     LoginUser,
     updateUserProfile,
   };
-  
+
   return <AuthContext value={authInfo}>{children}</AuthContext>;
 };
 
