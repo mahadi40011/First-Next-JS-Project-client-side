@@ -44,7 +44,7 @@ export default function OurAchievements() {
           {stats.map((stat) => (
             <div
               key={stat.id}
-              className="bg-gray-50 p-6 hover:border border-primary rounded-xl shadow hover:shadow-lg transition duration-300 text-center"
+              className="bg-gray-50 p-6 hover:outline outline-primary rounded-xl shadow hover:shadow-lg transition duration-300 text-center"
             >
               <div className="flex justify-center">{stat.icon}</div>
               <h3 className="text-2xl font-bold mb-2">{stat.number}</h3>

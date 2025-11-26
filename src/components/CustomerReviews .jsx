@@ -56,7 +56,7 @@ export default function CustomerReviews() {
           {reviews.map((review) => (
             <div
               key={review.id}
-              className="bg-white hover:border border-primary p-6 rounded-xl shadow hover:shadow-lg transition duration-300"
+              className="bg-white hover:outline outline-primary p-6 rounded-xl shadow hover:shadow-lg transition duration-300"
             >
               <div className="flex justify-center mb-4">
                 {/* <Image
@@ -66,7 +66,7 @@ export default function CustomerReviews() {
                   alt={review.name}
                   className=" rounded-full object-cover"
                 /> */}
-                <FaUser size={64} className="text-primary"/>
+                <FaUser size={64} className="text-primary" />
               </div>
               <h3 className="text-xl font-semibold mb-1">{review.name}</h3>
               <p className="text-gray-500 mb-2 text-sm">{review.role}</p>

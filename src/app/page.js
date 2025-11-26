@@ -1,3 +1,4 @@
+import BestSellingProducts from "@/components/BestSellingProducts";
 import CustomerReviews from "@/components/CustomerReviews ";
 import HeroBanner from "@/components/HeroBanner";
 import OurAchievements from "@/components/OurAchievements ";
@@ -7,7 +8,8 @@ import Image from "next/image";
 export default function Home() {
   return (
     <div className="py-20">
-      <HeroBanner></HeroBanner>
+      <HeroBanner/>
+      <BestSellingProducts/>
       <WhyChooseUs />
       <OurAchievements />
       <CustomerReviews/>

@@ -47,7 +47,7 @@ export default function WhyChooseUs() {
           {features.map((feature) => (
             <div
               key={feature.id}
-              className="bg-white hover:border border-primary p-6 rounded-xl shadow hover:shadow-lg transition duration-300 text-center"
+              className="bg-white hover:outline outline-primary p-6 rounded-xl shadow hover:shadow-lg transition duration-300 text-center"
             >
               <div className="flex justify-center">{feature.icon}</div>
               <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
