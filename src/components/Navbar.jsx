@@ -9,7 +9,7 @@ import Image from "next/image";
 
 export default function Navbar() {
   const pathname = usePathname();
-  const { user, loading } = useAuth();
+  const { user, loading, logOutUser } = useAuth();
 
   const navItems = [
     { id: 0, path: "/", name: "Home" },
@@ -30,6 +30,14 @@ export default function Navbar() {
       {item.name}
     </Link>
   ));
+
+  const handleLogOut = () => {
+    logOutUser()
+      .then(() => {})
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div className="bg-base-100 shadow-sm">
@@ -79,8 +87,18 @@ export default function Navbar() {
                       </h1>
                       <p className="text-base">{user?.email}</p>
                       <div className="flex flex-col gap-1 mt-3">
-                        <Link className="btn btn-sm " href="/add-product">Add Product</Link>
-                        <Link className="btn btn-sm " href="/manage-products">Manage Products</Link>
+                        <Link className="btn btn-sm text-lg" href="/add-product">
+                          Add Product
+                        </Link>
+                        <Link className="btn btn-sm text-lg" href="/manage-products">
+                          Manage Products
+                        </Link>
+                        <button
+                          onClick={handleLogOut}
+                          className="btn btn-sm bg-primary border-none text-white text-lg "
+                        >
+                          Log Out
+                        </button>
                       </div>
                     </div>
                   </div>
