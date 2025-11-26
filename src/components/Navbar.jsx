@@ -109,9 +109,9 @@ export default function Navbar() {
                     <FaUserPlus />
                   </span>
                   <div className="font-semibold space-x-0.5">
-                    <Link href="/">Sign Up</Link>
+                    <Link href="/register">Sign Up</Link>
                     <span>/</span>
-                    <Link href="/">Sign In</Link>
+                    <Link href="/login">Sign In</Link>
                   </div>
                 </div>
               )}
