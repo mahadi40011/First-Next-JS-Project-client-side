@@ -4,10 +4,12 @@ import { usePathname } from "next/navigation";
 import React from "react";
 import { FaUserPlus } from "react-icons/fa";
 import { BiMenuAltLeft } from "react-icons/bi";
-
+import useAuth from "@/hooks/useAuth";
+import Image from "next/image";
 
 export default function Navbar() {
   const pathname = usePathname();
+  const { user, loading } = useAuth();
 
   const navItems = [
     { id: 0, path: "/", name: "Home" },
@@ -35,7 +37,7 @@ export default function Navbar() {
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="text-primary lg:hidden">
-              <BiMenuAltLeft size={24}/>
+              <BiMenuAltLeft size={24} />
             </div>
             <ul
               tabIndex="-1"
@@ -44,22 +46,59 @@ export default function Navbar() {
               {navLinks}
             </ul>
           </div>
-          <a className="ml-2 md:ml-0 text-primary font-bold text-2xl">MegaMart</a>
+          <a className="ml-2 md:ml-0 text-primary font-bold text-2xl">
+            MegaMart
+          </a>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{navLinks}</ul>
         </div>
         <div className="navbar-end">
-          <div className="flex items-center gap-2.5">
-            <span>
-              <FaUserPlus />
-            </span>
-            <div className="font-semibold space-x-0.5">
-              <Link href="/">Sign Up</Link>
-              <span>/</span>
-              <Link href="/">Sign In</Link>
-            </div>
-          </div>
+          {loading ? (
+            <span className="loading loading-dots loading-md"></span>
+          ) : (
+            <>
+              {user ? (
+                <div className="dropdown dropdown-end">
+                  <div tabIndex={0} role="button" className=" m-1">
+                    <Image
+                      src={user?.photoURL || "/default-avatar.png"}
+                      alt="User Avatar"
+                      width={40}
+                      height={40}
+                      className="rounded-full"
+                    />
+                  </div>
+                  <div
+                    tabIndex="-1"
+                    className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+                  >
+                    <div className="mb-4 ">
+                      <h1 className="text-lg font-semibold">
+                        {user?.displayName}
+                      </h1>
+                      <p className="text-base">{user?.email}</p>
+                      <div className="flex flex-col gap-1 mt-3">
+                        <Link className="btn btn-sm " href="/add-product">Add Product</Link>
+                        <Link className="btn btn-sm " href="/manage-products">Manage Products</Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex items-center gap-2.5">
+                  <span>
+                    <FaUserPlus />
+                  </span>
+                  <div className="font-semibold space-x-0.5">
+                    <Link href="/">Sign Up</Link>
+                    <span>/</span>
+                    <Link href="/">Sign In</Link>
+                  </div>
+                </div>
+              )}
+            </>
+          )}
         </div>
       </div>
     </div>
