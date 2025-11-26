@@ -6,7 +6,7 @@ import React from "react";
 
 export default function HeroBanner() {
   return (
-    <section className="flex justify-between items-center w-full bg-[#212844] container rounded-3xl mt-10 px-30 text-gray-200">
+    <section className="flex justify-between items-center w-full bg-[#212844] container rounded-3xl px-30 text-gray-200">
       <div className="w-[70%] py-10">
         <p className="text-3xl font-semibold">Best Deals Online on MegaMart</p>
         <h1 className="text-6xl font-bold my-5">WELCOME TO MEGAMART</h1>

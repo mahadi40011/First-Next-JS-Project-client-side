@@ -32,7 +32,7 @@ export default function OurAchievements() {
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section className="mt-20 bg-white">
       <div className="container mx-auto px-6 text-center">
         <h2 className="text-3xl font-bold mb-6">Our Achievements</h2>
         <p className="text-gray-600 mb-12">
