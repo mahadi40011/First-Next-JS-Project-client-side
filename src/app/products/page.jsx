@@ -57,7 +57,7 @@ export default function Products() {
           {filtered.map((product) => (
             <div
               key={product._id}
-              className="bg-gray-50 flex flex-col hover:outline outline-primary rounded-xl shadow hover:shadow-lg transition duration-300 p-5"
+              className="bg-gray-100 flex flex-col hover:outline outline-primary rounded-xl shadow hover:shadow-lg transition duration-300 p-5"
             >
               <div className="w-full h-40 relative mb-4">
                 <Image
@@ -65,7 +65,7 @@ export default function Products() {
                   alt={product.title}
                   width={100}
                   height={160}
-                  className="rounded-lg w-full h-40 object-container "
+                  className="absolute rounded-lg w-full h-40 object-container "
                 />
               </div>
 

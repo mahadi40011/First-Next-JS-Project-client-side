@@ -33,9 +33,9 @@ export default function BestSellingProducts() {
                 <Image
                   src={product.imageUrl}
                   alt={product.title}
-                  width={300}
-                  height={200}
-                  className="rounded-lg object-cover "
+                  width={100}
+                  height={160}
+                  className="absolute rounded-lg w-full h-40 object-container "
                 />
               </div>
 
