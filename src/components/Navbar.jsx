@@ -13,10 +13,10 @@ export default function Navbar() {
 
   const navItems = [
     { id: 0, path: "/", name: "Home" },
-    { id: 1, path: "/about", name: "About" },
-    { id: 2, path: "/contact", name: "Contact" },
-    { id: 3, path: "/products", name: "Products" },
-    { id: 4, path: "/cart", name: "Cart" },
+    { id: 1, path: "/products", name: "Products" },
+    { id: 2, path: "/blog", name: "Blog" },
+    { id: 3, path: "/contact", name: "Contact" },
+    { id: 4, path: "/about", name: "About" },
   ];
 
   const navLinks = navItems.map((item) => (
