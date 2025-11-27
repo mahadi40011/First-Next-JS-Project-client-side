@@ -2,12 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { MdDetails } from "react-icons/md";
 
 export default function Products() {
   const [search, setSearch] = useState("");
+  const [allProducts, setAllProducts] = useState([])
 
   const products = [
     {
@@ -53,8 +54,16 @@ export default function Products() {
       image: "/SmartWatch.png",
     },
   ];
+  useEffect(() => {
+    fetch("http://localhost:5000/products")
+      .then((res) => res.json())
+      .then((data) => {
+        setAllProducts(data)
+        console.log(data)
+      });
+  }, []);
 
-  const filtered = products.filter((p) =>
+  const filtered = allProducts.filter((p) =>
     p.title.toLowerCase().includes(search.toLowerCase())
   );
 
@@ -91,12 +100,12 @@ export default function Products() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {filtered.map((product) => (
             <div
-              key={product.id}
+              key={product._id}
               className="bg-gray-50 hover:outline outline-primary rounded-xl shadow hover:shadow-lg transition duration-300 p-5"
             >
               <div className="w-full h-40 relative mb-4">
                 <Image
-                  src={product.image}
+                  src={product.imageUrl}
                   alt={product.title}
                   width={100}
                   height={160}
@@ -106,12 +115,14 @@ export default function Products() {
 
               <div className="text-start">
                 <h3 className="text-xl font-semibold">{product.title}</h3>
-                <p className="text-gray-600 text-sm mb-2">{product.desc}</p>
+                <p className="text-gray-600 text-sm mb-2">
+                  {product.shortDesc}
+                </p>
               </div>
 
               <div className="flex justify-between items-center mt-4">
                 <span className="text-3xl font-bold text-primary">
-                  {product.price}
+                  ${product.price}
                 </span>
                 <Link
                   href="/"
@@ -127,4 +138,3 @@ export default function Products() {
     </section>
   );
 }
-
