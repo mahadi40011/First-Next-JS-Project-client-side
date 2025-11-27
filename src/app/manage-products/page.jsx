@@ -32,7 +32,7 @@ export default function ManageProducts() {
       })
       .catch((err) => console.error("Error deleting product:", err));
 
-    setProducts(products.filter((p) => p.id !== id));
+    setProducts(products.filter((p) => p._id !== id));
   };
 
   return (
