@@ -5,40 +5,38 @@ import Link from "next/link";
 
 export default function ManageProducts() {
   const [products, setProducts] = useState([]);
-  const id = 5
-
-  const demoProducts = [
-    {
-      id: 1,
-      title: "Product One",
-      price: 120,
-      date: "2025-01-10",
-      image: "https://via.placeholder.com/150",
-    },
-    {
-      id: 2,
-      title: "Product Two",
-      price: 200,
-      date: "2025-01-11",
-      image: "https://via.placeholder.com/150",
-    },
-  ];
 
   useEffect(() => {
-    setTimeout(() => {
-      setProducts(demoProducts);
-    }, 0);
+    fetch("http://localhost:5000/manage-products")
+      .then((res) => res.json())
+      .then((data) => {
+        setProducts(data);
+        console.log(data);
+      });
   }, []);
 
   const handleDelete = (id) => {
     const isConfirm = confirm("Are you sure you want to delete?");
     if (!isConfirm) return;
 
+    fetch(`http://localhost:5000/products/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.deletedCount > 0) {
+          console.log("Product deleted successfully");
+        } else {
+          console.log("No product found to delete");
+        }
+      })
+      .catch((err) => console.error("Error deleting product:", err));
+
     setProducts(products.filter((p) => p.id !== id));
   };
 
   return (
-    <div className="overflow-x-auto container mt-10 rounded-2xl">
+    <div className="overflow-x-auto container my-10 rounded-xl">
       <table className="table text-center ">
         <thead className="bg-primary">
           <tr>
@@ -50,26 +48,30 @@ export default function ManageProducts() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td className="text-base font-bold">Cy Ganderton</td>
-            <td className="text-base font-semibold">$666</td>
-            <td className="text-base">high</td>
-            <td className="text-base">12/16/2020</td>
-            <td className="flex gap-3 justify-center items-center">
-              <Link
-                href={`/products/${id}`}
-                className="btn btn-sm btn-primary px-5"
-              >
-                View
-              </Link>
-              <button
-                className="btn btn-sm btn-secondary px-5"
-                onClick={handleDelete}
-              >
-                Delete
-              </button>
-            </td>
-          </tr>
+          {products.map((product) => (
+            <tr key={product._id}>
+              <td className="text-base font-bold text-start">
+                {product.title}
+              </td>
+              <td className="text-base font-semibold">{product.price}</td>
+              <td className="text-base">{product.priority}</td>
+              <td className="text-base">{product.date}</td>
+              <td className="flex gap-3 justify-center items-center">
+                <Link
+                  href={`/products/${product._id}`}
+                  className="btn btn-sm btn-primary px-5"
+                >
+                  View
+                </Link>
+                <button
+                  className="btn btn-sm btn-secondary px-5"
+                  onClick={() => handleDelete(product._id)}
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
