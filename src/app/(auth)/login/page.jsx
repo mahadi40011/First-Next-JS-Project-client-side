@@ -45,10 +45,11 @@ const Login = () => {
   const handleGoogleLogin = () => {
     googleLogin()
       .then(() => {
+        toast.success("login Successful");
         router.push("/");
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        toast.success("login Unsuccessful");
       });
   };
 
@@ -59,10 +60,11 @@ const Login = () => {
 
     LoginUser(email, password)
       .then(() => {
+        toast.success("login Successful");
         router.push("/");
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        toast.success("login Unsuccessful");
       });
   };
 

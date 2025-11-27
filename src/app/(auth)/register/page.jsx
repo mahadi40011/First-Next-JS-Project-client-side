@@ -8,6 +8,7 @@ import { FcGoogle } from "react-icons/fc";
 import useAuth from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { toast } from "react-toastify";
 // import useAuth from "../hooks/useAuth";
 // import Swal from "sweetalert2";
 
@@ -49,10 +50,11 @@ const Register = () => {
   const handleGoogleLogin = () => {
     googleLogin()
       .then(() => {
+        toast.success("login Successful");
         router.push("/");
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        toast.success("login Unsuccessful");
       });
   };
 
@@ -62,12 +64,14 @@ const handleSubmit = async (e) => {
   if (emailError || passwordError) return;
 
   const displayName = e.target.name.value;
-  const photoURL = e.target.photoURL.value;
+  // const photoURL = e.target.photoURL.value;
+  const photoURL = "https://i.ibb.co.com/jc5p23Y/Users-Name-icon.png";
 
   try {
     await createUser(email, password);
     await updateUserProfile(displayName, photoURL);
 
+    toast.success("register Successful")
     router.push("/");
   } catch (err) {
     console.log(err)
@@ -120,7 +124,7 @@ const handleSubmit = async (e) => {
 
           {/* Photo URL */}
           <label className="block text-sm font-medium  mt-5 mb-1">
-            Photo URL
+            Photo URL(Optional)
           </label>
           <input
             type="text"
