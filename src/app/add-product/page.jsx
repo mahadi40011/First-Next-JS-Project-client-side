@@ -18,8 +18,17 @@ export default function AddProduct() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("New Product:", form);
-    // You can send this to your database here.
+
+    fetch("http://localhost:5000/add-product", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(form),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
   };
 
   return (
@@ -137,4 +146,3 @@ export default function AddProduct() {
     </div>
   );
 }
-
