@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { toast } from "react-toastify";
 
 export default function ManageProducts() {
   const [products, setProducts] = useState([]);
@@ -11,7 +12,6 @@ export default function ManageProducts() {
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
-        console.log(data);
       });
   }, []);
 
@@ -25,9 +25,7 @@ export default function ManageProducts() {
       .then((res) => res.json())
       .then((data) => {
         if (data.deletedCount > 0) {
-          console.log("Product deleted successfully");
-        } else {
-          console.log("No product found to delete");
+          toast.success("Product deleted successfully");
         }
       })
       .catch((err) => console.error("Error deleting product:", err));
@@ -36,7 +34,7 @@ export default function ManageProducts() {
   };
 
   return (
-    <div className="overflow-x-auto container my-10 rounded-xl">
+    <div className="overflow-x-auto container my-10 rounded-md md:rounded-xl">
       <table className="table text-center ">
         <thead className="bg-primary">
           <tr>

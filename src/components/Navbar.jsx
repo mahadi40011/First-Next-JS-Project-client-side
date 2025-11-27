@@ -6,6 +6,7 @@ import { FaUserPlus } from "react-icons/fa";
 import { BiMenuAltLeft } from "react-icons/bi";
 import useAuth from "@/hooks/useAuth";
 import Image from "next/image";
+import { toast } from "react-toastify";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -34,8 +35,8 @@ export default function Navbar() {
   const handleLogOut = () => {
     logOutUser()
       .then(() => {})
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        toast.error("logout Unsuccessful")
       });
   };
 

@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function AddProduct() {
   const [form, setForm] = useState({
@@ -31,8 +32,10 @@ export default function AddProduct() {
       body: JSON.stringify(form),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
-      .catch((error) => console.error(error));
+      .then((data) => {
+        toast.success("Product Added Successfully");
+      })
+      .catch(() => toast.error("Product Added Unsuccessfully"));
   };
 
   return (
