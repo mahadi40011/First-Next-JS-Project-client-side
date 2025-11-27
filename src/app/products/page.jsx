@@ -10,50 +10,6 @@ export default function Products() {
   const [search, setSearch] = useState("");
   const [allProducts, setAllProducts] = useState([])
 
-  const products = [
-    {
-      id: 1,
-      title: "Premium Indoor Plant",
-      desc: "A healthy indoor plant perfect for home decoration.",
-      price: "$25",
-      image: "/SmartWatch.png",
-    },
-    {
-      id: 2,
-      title: "Outdoor Flower Pot",
-      desc: "Beautiful pot with seasonal flowers.",
-      price: "$18",
-      image: "/SmartWatch.png",
-    },
-    {
-      id: 3,
-      title: "Cactus Plant Set",
-      desc: "Low-maintenance cactus plants for office desk.",
-      price: "$30",
-      image: "/SmartWatch.png",
-    },
-    {
-      id: 4,
-      title: "Mini Aloe Vera",
-      desc: "Fresh aloe vera plant with strong leaves.",
-      price: "$12",
-      image: "/SmartWatch.png",
-    },
-    {
-      id: 5,
-      title: "Hanging Plant",
-      desc: "Perfect for balconies and living rooms.",
-      price: "$20",
-      image: "/SmartWatch.png",
-    },
-    {
-      id: 6,
-      title: "Large Monstera",
-      desc: "High quality Monstera plant for big rooms.",
-      price: "$45",
-      image: "/SmartWatch.png",
-    },
-  ];
   useEffect(() => {
     fetch("http://localhost:5000/products")
       .then((res) => res.json())
@@ -101,7 +57,7 @@ export default function Products() {
           {filtered.map((product) => (
             <div
               key={product._id}
-              className="bg-gray-50 hover:outline outline-primary rounded-xl shadow hover:shadow-lg transition duration-300 p-5"
+              className="bg-gray-50 flex flex-col hover:outline outline-primary rounded-xl shadow hover:shadow-lg transition duration-300 p-5"
             >
               <div className="w-full h-40 relative mb-4">
                 <Image
@@ -113,7 +69,7 @@ export default function Products() {
                 />
               </div>
 
-              <div className="text-start">
+              <div className="text-start flex-1">
                 <h3 className="text-xl font-semibold">{product.title}</h3>
                 <p className="text-gray-600 text-sm mb-2">
                   {product.shortDesc}
@@ -125,7 +81,7 @@ export default function Products() {
                   ${product.price}
                 </span>
                 <Link
-                  href="/"
+                  href={`products/${product._id}`}
                   className="bg-primary text-white px-3 py-2 rounded-lg flex items-center gap-2  hover:bg-sky-700 transition"
                 >
                   <MdDetails /> Details

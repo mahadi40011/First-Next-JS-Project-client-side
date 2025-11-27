@@ -3,7 +3,7 @@ const nextConfig = {
   /* config options here */
   reactCompiler: true,
   images: {
-    domains: ["lh3.googleusercontent.com", "i.ibb.co.com"], // allow Google profile images
+    domains: ["lh3.googleusercontent.com", "i.ibb.co.com", "i.ibb.co"], // allow Google profile images
   },
 };
 

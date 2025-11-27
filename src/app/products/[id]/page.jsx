@@ -1,27 +1,23 @@
 "use client";
 
-import React from "react";
+import React, { use, useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FaArrowLeft } from "react-icons/fa";
 
-export default function ProductDetails() {
+export default function ProductDetails({ params }) {
+  const [product, setProduct] = useState({})
   const router = useRouter();
+  const { id } = use(params);
 
-  const product = {
-    title: "Premium Studio Headphones",
-    image: "/SmartWatch.png",
-    owner: "Owner Name",
-    status: "in-stock",
-    brand: "brand name",
-    color: "white",
-    description:
-      "Experience unmatched sound clarity with our Premium Studio Headphones. Designed for music enthusiasts and professionals, these headphones deliver deep bass, crisp highs, and full-range audio balance. The comfortable padding allows long hours of use without discomfort. Perfect for mixing, gaming, or casual listening.",
-    price: "$120",
-    regular_price: "$150",
-    date: "2025-01-10",
-    priority: "High",
-  };
+   useEffect(() => {
+      fetch(`http://localhost:5000/products/${id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setProduct(data)
+          console.log(data)
+        });
+    }, [id]);
 
   return (
     <section className="py-16">
@@ -35,12 +31,12 @@ export default function ProductDetails() {
 
         <div className="flex gap-10">
           <div className="w-1/3 h-60 sm:h-80 md:h-96 relative mb-10">
-              <Image
-                src={product.image}
-                alt={product.title}
-                fill
-                className="object-contain rounded-xl "
-              />
+            <Image
+              src={product.imageUrl}
+              alt={product.title}
+              fill
+              className="object-contain rounded-xl "
+            />
           </div>
 
           <div className="w-2/3 p-6 rounded-xl">
@@ -59,7 +55,7 @@ export default function ProductDetails() {
               </p>
             </div>
 
-            <p className="text-gray-700 leading-7">{product.description}</p>
+            <p className="text-gray-700 ">{product.fullDesc}</p>
           </div>
         </div>
       </div>

@@ -75,7 +75,7 @@ export default function BestSellingProducts() {
                   {product.price}
                 </span>
                 <Link
-                  href="/"
+                  href={`/products/${product.id}`}
                   className="bg-primary text-white px-3 py-2 rounded-lg flex items-center gap-2  hover:bg-sky-700 transition"
                 >
                   <MdDetails /> Details
