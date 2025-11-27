@@ -1,42 +1,18 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { FaShoppingCart } from "react-icons/fa";
 import { MdDetails } from "react-icons/md";
 import Link from "next/link";
 
 export default function BestSellingProducts() {
-  const products = [
-    {
-      id: 1,
-      name: "Premium Headphones",
-      price: "$120",
-      description: "Experience crystal clear sound quality.",
-      image: "/assets/product1.jpg",
-    },
-    {
-      id: 2,
-      name: "Smart Watch",
-      price: "$90",
-      description: "Track your health and stay connected.",
-      image: "/assets/product2.jpg",
-    },
-    {
-      id: 3,
-      name: "Wireless Speaker",
-      price: "$60",
-      description: "Powerful sound with long battery life.",
-      image: "/assets/product3.jpg",
-    },
-    {
-      id: 4,
-      name: "Gaming Mouse",
-      price: "$45",
-      description: "Precision and comfort for gamers.",
-      image: "/assets/product4.jpg",
-    },
-  ];
+  const [allProducts, setAllProducts] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/latest-products")
+      .then((res) => res.json())
+      .then((data) => setAllProducts(data));
+  }, []);
 
   return (
     <section className="mt-20 bg-white">
@@ -48,34 +24,34 @@ export default function BestSellingProducts() {
 
         {/* Product Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {products.map((product) => (
+          {allProducts.map((product) => (
             <div
               key={product.id}
-              className="bg-gray-50 hover:outline outline-primary rounded-xl shadow hover:shadow-lg transition duration-300 p-5"
+              className="bg-gray-50 flex flex-col hover:outline outline-primary rounded-xl shadow hover:shadow-lg transition duration-300 p-5"
             >
               <div className="w-full h-40 relative mb-4">
                 <Image
-                  src={product.image}
-                  alt={product.name}
+                  src={product.imageUrl}
+                  alt={product.title}
                   width={300}
                   height={200}
                   className="rounded-lg object-cover "
                 />
               </div>
 
-              <div className="text-start">
-                <h3 className="text-xl font-semibold">{product.name}</h3>
+              <div className="text-start flex-1">
+                <h3 className="text-xl font-semibold">{product.title}</h3>
                 <p className="text-gray-600 text-sm mb-2">
-                  {product.description}
+                  {product.shortDesc}
                 </p>
               </div>
 
               <div className="flex justify-between items-center mt-4">
                 <span className="text-3xl font-bold text-primary">
-                  {product.price}
+                  ${product.price}
                 </span>
                 <Link
-                  href={`/products/${product.id}`}
+                  href={`/products/${product._id}`}
                   className="bg-primary text-white px-3 py-2 rounded-lg flex items-center gap-2  hover:bg-sky-700 transition"
                 >
                   <MdDetails /> Details
