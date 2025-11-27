@@ -11,10 +11,10 @@ export default function Products() {
   const [allProducts, setAllProducts] = useState([])
 
   useEffect(() => {
-    fetch("http://localhost:5000/products")
+    fetch("https://frist-next-js-project-server-side.vercel.app/products")
       .then((res) => res.json())
       .then((data) => {
-        setAllProducts(data)
+        setAllProducts(data);
       });
   }, []);
 

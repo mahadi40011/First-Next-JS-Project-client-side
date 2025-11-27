@@ -9,7 +9,9 @@ export default function BestSellingProducts() {
   const [allProducts, setAllProducts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/latest-products")
+    fetch(
+      "https://frist-next-js-project-server-side.vercel.app/latest-products"
+    )
       .then((res) => res.json())
       .then((data) => setAllProducts(data));
   }, []);

@@ -8,7 +8,9 @@ export default function ManageProducts() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/manage-products")
+    fetch(
+      "https://frist-next-js-project-server-side.vercel.app/manage-products"
+    )
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
@@ -19,9 +21,12 @@ export default function ManageProducts() {
     const isConfirm = confirm("Are you sure you want to delete?");
     if (!isConfirm) return;
 
-    fetch(`http://localhost:5000/products/${id}`, {
-      method: "DELETE",
-    })
+    fetch(
+      `https://frist-next-js-project-server-side.vercel.app/products/${id}`,
+      {
+        method: "DELETE",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.deletedCount > 0) {

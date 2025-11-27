@@ -12,7 +12,7 @@ export default function ProductDetails({ params }) {
   const { id } = use(params);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/products/${id}`)
+    fetch(`https://frist-next-js-project-server-side.vercel.app/products/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setProduct(data);

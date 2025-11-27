@@ -24,7 +24,7 @@ export default function AddProduct() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:5000/add-product", {
+    fetch("https://frist-next-js-project-server-side.vercel.app/add-product", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
