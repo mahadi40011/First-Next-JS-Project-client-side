@@ -9,11 +9,15 @@ export default function AddProduct() {
     price: "",
     date: "",
     priority: "",
-    imageUrl: "",
   });
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+      imageUrl:
+        "https://i.ibb.co.com/0yRmcPpt/images-q-tbn-ANd9-Gc-Tg-Vq-Z1pzz-Tl-Jq-V-a-U6v-Yf-itarc-MZx-OKVOw-s.png",
+    });
   };
 
   const handleSubmit = (e) => {
@@ -124,8 +128,9 @@ export default function AddProduct() {
 
         {/* Optional Image URL */}
         <div>
-          <label className="font-semibold">Image URL (optional)</label>
+          <label className="font-semibold">Image URL (disabled)</label>
           <input
+            disabled
             type="text"
             name="imageUrl"
             value={form.imageUrl}

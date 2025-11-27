@@ -45,7 +45,7 @@ export default function Products() {
             />
           </div>
 
-          <select className="w-full sm:w-1/4 border py-2 px-3 rounded-lg">
+          <select className="w-full sm:w-1/2 border py-2 px-3 rounded-lg">
             <option>All Categories</option>
             <option>Indoor Plants</option>
             <option>Outdoor Plants</option>

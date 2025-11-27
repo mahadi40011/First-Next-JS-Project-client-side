@@ -4,20 +4,21 @@ import React, { use, useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FaArrowLeft } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 export default function ProductDetails({ params }) {
-  const [product, setProduct] = useState({})
+  const [product, setProduct] = useState({});
   const router = useRouter();
   const { id } = use(params);
 
-   useEffect(() => {
-      fetch(`http://localhost:5000/products/${id}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setProduct(data)
-          console.log(data)
-        });
-    }, [id]);
+  useEffect(() => {
+    fetch(`http://localhost:5000/products/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setProduct(data);
+        console.log(data);
+      });
+  }, [id]);
 
   return (
     <section className="py-16">
@@ -56,6 +57,13 @@ export default function ProductDetails({ params }) {
             </div>
 
             <p className="text-gray-700 ">{product.fullDesc}</p>
+
+            <button
+              onClick={() => toast.success("Product added to Cart")}
+              className="btn btn-primary mt-10"
+            >
+              Add to Cart
+            </button>
           </div>
         </div>
       </div>
